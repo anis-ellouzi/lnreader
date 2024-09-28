@@ -1,6 +1,6 @@
 import * as DocumentPicker from 'expo-document-picker';
 import * as Notifications from 'expo-notifications';
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 
 import { getPlugin } from '@plugins/pluginManager';
 import { restoreLibrary } from '@database/queries/NovelQueries';
@@ -31,7 +31,7 @@ export const createBackup = async () => {
   } catch (error: any) {
     showToast(error.message);
   } finally {
-    BackgroundService.stop();
+    BGService.stop();
   }
 };
 
@@ -70,14 +70,14 @@ export const restoreBackup = async () => {
     const restoreBackupBackgroundAction = async (taskData?: TaskData) => {
       let errorString = '';
       let restoredNovelsCount = 0;
-      for (let i = 0; BackgroundService.isRunning() && i < novels.length; i++) {
+      for (let i = 0; BGService.isRunning() && i < novels.length; i++) {
         try {
-          if (BackgroundService.isRunning()) {
+          if (BGService.isRunning()) {
             const plugin = getPlugin(novels[i].pluginId);
             if (!plugin) {
               throw new Error(`No plugin found with id ${novels[i].pluginId}`);
             }
-            BackgroundService.updateNotification({
+            BGService.updateNotification({
               taskTitle: novels[i].name,
               taskDesc: '(' + (i + 1) + '/' + novels.length + ')',
               progressBar: { max: novels.length, value: i + 1 },
@@ -109,11 +109,11 @@ export const restoreBackup = async () => {
         },
         trigger: null,
       });
-      BackgroundService.stop();
+      BGService.stop();
     };
 
     if (novels.length > 0) {
-      await BackgroundService.start<TaskData>(
+      await BGService.start<TaskData>(
         restoreBackupBackgroundAction,
         notificationOptions,
       );

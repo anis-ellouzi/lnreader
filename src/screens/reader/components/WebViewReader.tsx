@@ -17,10 +17,11 @@ import {
   initialChapterGeneralSettings,
   initialChapterReaderSettings,
 } from '@hooks/persisted/useSettings';
-import { getBatteryLevelSync } from 'react-native-device-info';
+import { getBatteryLevel } from '@utils/deviceInfos';
 import * as Speech from 'expo-speech';
-import { PLUGIN_STORAGE } from '@utils/Storages';
+import { PLUGIN_STORAGE } from '@utils/constants/Storages';
 import { useChapterContext } from '../ChapterContext';
+import { ASSETS_URI_PREFIX } from '@utils/constants/Storages';
 
 type WebViewPostEvent = {
   type: string;
@@ -49,11 +50,7 @@ const onLogMessage = (payload: { nativeEvent: { data: string } }) => {
 };
 
 const { RNDeviceInfo } = NativeModules;
-const deviceInfoEmitter = new NativeEventEmitter(RNDeviceInfo);
-
-const assetsUriPrefix = __DEV__
-  ? 'http://localhost:8081/assets'
-  : 'file:///android_asset';
+//const deviceInfoEmitter = new NativeEventEmitter(RNDeviceInfo);
 
 const WebViewReader: React.FC<WebViewReaderProps> = ({
   html,
@@ -77,12 +74,13 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
       initialChapterGeneralSettings,
     [],
   );
-  const batteryLevel = useMemo(getBatteryLevelSync, []);
+  const batteryLevel = useMemo(getBatteryLevel, []);
   const plugin = getPlugin(novel?.pluginId);
   const pluginCustomJS = `file://${PLUGIN_STORAGE}/${plugin?.id}/custom.js`;
   const pluginCustomCSS = `file://${PLUGIN_STORAGE}/${plugin?.id}/custom.css`;
 
   useEffect(() => {
+    /*
     const mmkvListener = MMKVStorage.addOnValueChangedListener(key => {
       switch (key) {
         case CHAPTER_READER_SETTINGS:
@@ -101,7 +99,7 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
           break;
       }
     });
-
+    
     const subscription = deviceInfoEmitter.addListener(
       'RNDeviceInfo_batteryLevelDidChange',
       (level: number) => {
@@ -109,11 +107,11 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
           `reader.batteryLevel.val = ${level}`,
         );
       },
-    );
+    );*/
 
     return () => {
-      subscription.remove();
-      mmkvListener.remove();
+      //subscription.remove();
+      //mmkvListener.remove();
     };
   }, []);
 
@@ -173,7 +171,7 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
           <html>
             <head>
               <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-              <link rel="stylesheet" href="${assetsUriPrefix}/css/index.css">
+              <link rel="stylesheet" href="${ASSETS_URI_PREFIX}/css/index.css">
               <style>
               :root {
                 --StatusBar-currentHeight: ${StatusBar.currentHeight}px;
@@ -203,9 +201,9 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
                 
                 @font-face {
                   font-family: ${readerSettings.fontFamily};
-                  src: url("file:///android_asset/fonts/${
-                    readerSettings.fontFamily
-                  }.ttf");
+                  src: url("${ASSETS_URI_PREFIX}/fonts/${
+          readerSettings.fontFamily
+        }.ttf");
                 }
                 </style>
 
@@ -241,11 +239,11 @@ const WebViewReader: React.FC<WebViewReaderProps> = ({
                   },
                 })}
               </script>
-              <script src="${assetsUriPrefix}/js/icons.js"></script>
-              <script src="${assetsUriPrefix}/js/van.js"></script>
-              <script src="${assetsUriPrefix}/js/text-vibe.js"></script>
-              <script src="${assetsUriPrefix}/js/core.js"></script>
-              <script src="${assetsUriPrefix}/js/index.js"></script>
+              <script src="${ASSETS_URI_PREFIX}/js/icons.js"></script>
+              <script src="${ASSETS_URI_PREFIX}/js/van.js"></script>
+              <script src="${ASSETS_URI_PREFIX}/js/text-vibe.js"></script>
+              <script src="${ASSETS_URI_PREFIX}/js/core.js"></script>
+              <script src="${ASSETS_URI_PREFIX}/js/index.js"></script>
               <script src="${pluginCustomJS}"></script>
               <script>
                 ${readerSettings.customJS}

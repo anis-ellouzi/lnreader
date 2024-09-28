@@ -3,7 +3,7 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { ThemePicker } from '@components/ThemePicker/ThemePicker';
 import { ThemeColors } from '@theme/types';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 import { useTheme } from '@hooks/persisted';
 import { darkThemes, lightThemes } from '@theme/md3';
 

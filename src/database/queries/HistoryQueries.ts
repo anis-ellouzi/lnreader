@@ -4,7 +4,7 @@ import * as SQLite from 'expo-sqlite';
 import { noop } from 'lodash-es';
 const db = SQLite.openDatabase('lnreader.db');
 
-import { showToast } from '../../utils/showToast';
+import { showToast } from '@utils/showToast';
 import { getString } from '@strings/translations';
 
 const getHistoryQuery = `

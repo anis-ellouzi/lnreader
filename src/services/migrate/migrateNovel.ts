@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 
 import { NovelInfo, ChapterInfo } from '@database/types';
 import {
@@ -167,7 +167,7 @@ export const migrateNovel = async ({
       setLastRead(toChapter);
     }
 
-    await BackgroundService.updateNotification({
+    await BGService.updateNotification({
       taskDesc: '(' + (fromPointer + 1) + '/' + fromChapters.length + ')',
       progressBar: { max: fromChapters.length, value: fromPointer + 1 },
     });

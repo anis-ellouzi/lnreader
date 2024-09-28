@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('lnreader.db');
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 import ZipArchive from '@native/ZipArchive';
 import dayjs from 'dayjs';
 import {
@@ -11,7 +11,7 @@ import { LOCAL_PLUGIN_ID } from '@plugins/pluginManager';
 import { getString } from '@strings/translations';
 import FileManager from '@native/FileManager';
 import EpubUtil from '@native/EpubUtil';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 
 const insertLocalNovel = (
   name: string,
@@ -165,7 +165,7 @@ export const importEpub = async ({
   const now = dayjs().toISOString();
   const filePathSet = new Set<string>();
   if (novel.chapters) {
-    BackgroundService.updateNotification({
+    BGService.updateNotification({
       taskTitle: getString('advancedSettingsScreen.importNovel'),
       taskDesc: '0/' + novel.chapters.length,
       progressBar: {
@@ -174,7 +174,7 @@ export const importEpub = async ({
       },
     });
     for (let i = 0; i < novel.chapters?.length; i++) {
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: i + 1 + '/' + novel.chapters.length,
         progressBar: {
           value: i + 1,
@@ -196,7 +196,7 @@ export const importEpub = async ({
     }
   }
   const novelDir = NOVEL_STORAGE + '/local/' + novelId;
-  BackgroundService.updateNotification({
+  BGService.updateNotification({
     taskTitle: getString('advancedSettingsScreen.importStaticFiles'),
     taskDesc: '0/' + filePathSet.size,
     progressBar: {
@@ -206,7 +206,7 @@ export const importEpub = async ({
   });
   let cnt = 1;
   for (let filePath of filePathSet) {
-    BackgroundService.updateNotification({
+    BGService.updateNotification({
       taskDesc: cnt + '/' + filePathSet.size,
       progressBar: {
         value: cnt,

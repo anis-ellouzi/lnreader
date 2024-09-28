@@ -1,9 +1,6 @@
-import BackgroundService from 'react-native-background-actions';
 import * as Notifications from 'expo-notifications';
-
 import { getMMKVObject, setMMKVObject } from '@utils/mmkv/mmkv';
 import { importEpub } from './epub/import';
-import { getString } from '@strings/translations';
 import { updateLibrary } from './updates';
 import { DriveFile } from '@api/drive/types';
 import { createDriveBackup, driveRestore } from './backup/drive';
@@ -14,6 +11,7 @@ import {
 } from './backup/selfhost';
 import { migrateNovel, MigrateNovelData } from './migrate/migrateNovel';
 import { downloadChapter } from './download/downloadChapter';
+import BGService from '@utils/backgroundActions';
 
 export type BackgroundTask =
   | {
@@ -48,7 +46,7 @@ export default class ServiceManager {
     return this.instance;
   }
   get isRunning() {
-    return BackgroundService.isRunning();
+    return BGService.isRunning();
   }
   isMultiplicableTask(task: BackgroundTask) {
     return (
@@ -59,23 +57,7 @@ export default class ServiceManager {
   }
   start() {
     if (!this.isRunning) {
-      BackgroundService.start(ServiceManager.lauch, {
-        taskName: 'app_services',
-        taskTitle: 'App Service',
-        taskDesc: getString('common.preparing'),
-        taskIcon: { name: 'notification_icon', type: 'drawable' },
-        color: '#00adb5',
-        linkingURI: 'lnreader://',
-      }).catch(error => {
-        Notifications.scheduleNotificationAsync({
-          content: {
-            title: getString('backupScreen.drive.backupInterruped'),
-            body: error.message,
-          },
-          trigger: null,
-        });
-        BackgroundService.stop();
-      });
+      BGService.start(ServiceManager.lauch);
     }
   }
   async executeTask(task: BackgroundTask) {
@@ -114,7 +96,7 @@ export default class ServiceManager {
       'MIGRATE_NOVEL': 0,
       'DOWNLOAD_CHAPTER': 0,
     };
-    while (BackgroundService.isRunning()) {
+    while (BGService.isRunning()) {
       const currentTask = manager.getTaskList()[0];
       if (!currentTask) {
         break;
@@ -195,13 +177,13 @@ export default class ServiceManager {
     setMMKVObject(this.STORE_KEY, []);
   }
   pause() {
-    BackgroundService.stop();
+    BGService.stop();
   }
   resume() {
     this.start();
   }
   stop() {
-    BackgroundService.stop();
+    BGService.stop();
     this.clearTaskList();
   }
 }

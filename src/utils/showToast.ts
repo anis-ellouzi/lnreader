@@ -1,4 +1,2 @@
-import { ToastAndroid } from 'react-native';
-
-export const showToast = (message: string) =>
-  ToastAndroid.show(message, ToastAndroid.SHORT);
+import Toast from 'react-native-root-toast';
+export const showToast = (message: string) => Toast.show(message);

@@ -16,7 +16,7 @@ import {
 import { BackupCategory } from '@database/types';
 import { BackupEntryName } from './types';
 import FileManager from '@native/FileManager';
-import { ROOT_STORAGE } from '@utils/Storages';
+import { ROOT_STORAGE } from '@utils/constants/Storages';
 import ServiceManager from '@services/ServiceManager';
 
 const APP_STORAGE_URI = 'file://' + ROOT_STORAGE;

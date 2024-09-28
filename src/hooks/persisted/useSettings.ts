@@ -3,7 +3,7 @@ import {
   LibraryFilter,
   LibrarySortOrder,
 } from '@screens/library/constants/constants';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 import { Voice } from 'expo-speech';
 
 export const APP_SETTINGS = 'APP_SETTINGS';

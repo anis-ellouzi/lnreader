@@ -1,4 +1,4 @@
-import { useMMKVString } from 'react-native-mmkv';
+import { useMMKVString } from '@utils/mmkv/mmkv';
 
 export const SELF_HOST_BACKUP = 'SELF_HOST_BACKUP';
 

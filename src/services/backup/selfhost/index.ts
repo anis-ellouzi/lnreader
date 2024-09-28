@@ -1,10 +1,10 @@
 import { sleep } from '@utils/sleep';
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 import { download, upload } from '@api/remote';
 import { getString } from '@strings/translations';
 import { CACHE_DIR_PATH, prepareBackupData, restoreData } from '../utils';
 import { ZipBackupName } from '../types';
-import { ROOT_STORAGE } from '@utils/Storages';
+import { ROOT_STORAGE } from '@utils/constants/Storages';
 
 export interface SelfHostData {
   host: string;
@@ -12,7 +12,7 @@ export interface SelfHostData {
 }
 
 export const createSelfHostBackup = ({ host, backupFolder }: SelfHostData) => {
-  return BackgroundService.updateNotification({
+  return BGService.updateNotification({
     taskDesc: getString('backupScreen.preparingData'),
     progressBar: {
       indeterminate: true,
@@ -22,7 +22,7 @@ export const createSelfHostBackup = ({ host, backupFolder }: SelfHostData) => {
   })
     .then(() => prepareBackupData(CACHE_DIR_PATH))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.uploadingData'),
         progressBar: {
           indeterminate: true,
@@ -34,7 +34,7 @@ export const createSelfHostBackup = ({ host, backupFolder }: SelfHostData) => {
     .then(() => sleep(200))
     .then(() => upload(host, backupFolder, ZipBackupName.DATA, CACHE_DIR_PATH))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.uploadingDownloadedFiles'),
         progressBar: {
           indeterminate: true,
@@ -50,7 +50,7 @@ export const createSelfHostBackup = ({ host, backupFolder }: SelfHostData) => {
 };
 
 export const selfHostRestore = ({ host, backupFolder }: SelfHostData) => {
-  return BackgroundService.updateNotification({
+  return BGService.updateNotification({
     taskDesc: getString('backupScreen.downloadingData'),
     progressBar: {
       indeterminate: true,
@@ -62,7 +62,7 @@ export const selfHostRestore = ({ host, backupFolder }: SelfHostData) => {
       download(host, backupFolder, ZipBackupName.DATA, CACHE_DIR_PATH),
     )
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.restoringData'),
         progressBar: {
           indeterminate: true,
@@ -74,7 +74,7 @@ export const selfHostRestore = ({ host, backupFolder }: SelfHostData) => {
     .then(() => sleep(200))
     .then(() => restoreData(CACHE_DIR_PATH))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.downloadingDownloadedFiles'),
         progressBar: {
           indeterminate: true,

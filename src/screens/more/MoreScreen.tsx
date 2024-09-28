@@ -8,7 +8,7 @@ import { MoreHeader } from './components/MoreHeader';
 import { useLibrarySettings, useTheme } from '@hooks/persisted';
 import { MoreStackScreenProps } from '@navigators/types';
 import Switch from '@components/Switch/Switch';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 import ServiceManager, { BackgroundTask } from '@services/ServiceManager';
 
 const MoreScreen = ({ navigation }: MoreStackScreenProps) => {

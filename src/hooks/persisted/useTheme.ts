@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 import { Appearance } from 'react-native';
-import {
-  useMMKVBoolean,
-  useMMKVObject,
-  useMMKVString,
-} from 'react-native-mmkv';
+import { useMMKVBoolean, useMMKVObject, useMMKVString } from '@utils/mmkv/mmkv';
 import { overlay } from 'react-native-paper';
 import Color from 'color';
 

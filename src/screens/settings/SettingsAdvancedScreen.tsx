@@ -24,14 +24,14 @@ import {
 import { Appbar, Button, List } from '@components';
 import { AdvancedSettingsScreenProps } from '@navigators/types';
 import { StyleSheet, View } from 'react-native';
-import { getUserAgentSync } from 'react-native-device-info';
-import CookieManager from '@react-native-cookies/cookies';
+import { getUserAgent } from '@hooks/persisted/useUserAgent';
+//import CookieManager from '@react-native-cookies/cookies';
 import { store } from '@plugins/helpers/storage';
 
 const AdvancedSettings = ({ navigation }: AdvancedSettingsScreenProps) => {
   const theme = useTheme();
   const clearCookies = () => {
-    CookieManager.clearAll();
+    //CookieManager.clearAll();
     store.clearAll();
     showToast(getString('webview.cookiesCleared'));
   };
@@ -215,7 +215,7 @@ const AdvancedSettings = ({ navigation }: AdvancedSettingsScreenProps) => {
             <Button
               style={styles.button}
               onPress={() => {
-                setUserAgent(getUserAgentSync());
+                setUserAgent(getUserAgent());
                 hideUserAgentModal();
               }}
               title={getString('common.reset')}

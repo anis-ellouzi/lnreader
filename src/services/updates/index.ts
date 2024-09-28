@@ -1,11 +1,11 @@
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 
 import {
   getLibraryWithCategory,
   getLibraryNovelsFromDb,
 } from '../../database/queries/LibraryQueries';
 
-import { showToast } from '../../utils/showToast';
+import { showToast } from '@utils/showToast';
 import { UpdateNovelOptions, updateNovel } from './LibraryUpdateQueries';
 import { LibraryNovelInfo } from '@database/types';
 import { sleep } from '@utils/sleep';
@@ -48,7 +48,7 @@ const updateLibrary = async (categoryId?: number) => {
         /**
          * Update notification
          */
-        await BackgroundService.updateNotification({
+        await BGService.updateNotification({
           taskTitle: '(' + (i + 1) + '/' + libraryNovels.length + ')',
           taskDesc: libraryNovels[i].name,
           progressBar: { max: libraryNovels.length, value: i + 1 },

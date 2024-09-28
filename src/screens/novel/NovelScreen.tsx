@@ -19,7 +19,7 @@ import Animated, {
 
 import { Portal, Appbar, Snackbar, AnimatedFAB } from 'react-native-paper';
 import * as Haptics from 'expo-haptics';
-import { showToast } from '../../utils/showToast';
+import { showToast } from '@utils/showToast';
 import {
   useAppSettings,
   useDownload,

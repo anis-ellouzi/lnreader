@@ -24,6 +24,7 @@ import color from 'color';
 import { useBatteryLevel } from 'react-native-device-info';
 import * as Speech from 'expo-speech';
 import TextToSpeechSettings from './Settings/TextToSpeechSettings';
+import { ASSETS_URI_PREFIX } from '@utils/constants/Storages';
 
 export type TextAlignments =
   | 'left'
@@ -81,10 +82,7 @@ const SettingsReaderScreen = () => {
   const readerSettings = useChapterReaderSettings();
   const chapterGeneralSettings = useChapterGeneralSettings();
   const READER_HEIGHT = 280;
-  const assetsUriPrefix = useMemo(
-    () => (__DEV__ ? 'http://localhost:8081/assets' : 'file:///android_asset'),
-    [],
-  );
+  const assetsUriPrefix = useMemo(() => ASSETS_URI_PREFIX, []);
   const webViewCSS = `
   <link rel="stylesheet" href="${assetsUriPrefix}/css/index.css">
     <style>
@@ -114,9 +112,7 @@ const SettingsReaderScreen = () => {
       
       @font-face {
         font-family: ${readerSettings.fontFamily};
-        src: url("file:///android_asset/fonts/${
-          readerSettings.fontFamily
-        }.ttf");
+        src: url("${ASSETS_URI_PREFIX}/fonts/${readerSettings.fontFamily}.ttf");
       }
     </style>
 

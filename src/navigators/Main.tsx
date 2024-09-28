@@ -35,7 +35,7 @@ import BrowseSettings from '../screens/browse/BrowseSettings';
 import WebviewScreen from '@screens/WebviewScreen/WebviewScreen';
 import { RootStackParamList } from './types';
 import Color from 'color';
-import { useMMKVBoolean } from 'react-native-mmkv';
+import { useMMKVBoolean } from '../utils/mmkv/mmkv';
 import OnboardingScreen from '@screens/onboarding/OnboardingScreen';
 import {
   createRepository,
@@ -94,7 +94,7 @@ const MainNavigator = () => {
   const { isNewVersion, latestRelease } = useGithubUpdateChecker();
 
   if (!isOnboarded) {
-    return <OnboardingScreen />;
+    //return <OnboardingScreen />;
   }
 
   return (

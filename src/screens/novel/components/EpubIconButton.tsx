@@ -4,13 +4,13 @@ import ChooseEpubLocationModal from './ChooseEpubLocationModal';
 import { StatusBar } from 'react-native';
 import { ThemeColors } from '@theme/types';
 
-import EpubBuilder from '@cd-z/react-native-epub-creator';
+//import EpubBuilder from '@cd-z/react-native-epub-creator';
 import { ChapterInfo, NovelInfo } from '@database/types';
 
 import { useChapterReaderSettings } from '@hooks/persisted';
 import { useBoolean } from '@hooks/index';
 import { showToast } from '@utils/showToast';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 import FileManager from '@native/FileManager';
 
 interface EpubIconButtonProps {
@@ -105,6 +105,8 @@ const EpubIconButton: React.FC<EpubIconButtonProps> = ({
   );
 
   const createEpub = async (uri: string) => {
+    return null;
+    /*
     var epub = new EpubBuilder(
       {
         title: novel.name,
@@ -158,7 +160,7 @@ const EpubIconButton: React.FC<EpubIconButtonProps> = ({
       console.error(error);
       showToast('Cannot create because: ' + error);
       await epub.discardChanges();
-    }
+    }*/
   };
   return (
     <>

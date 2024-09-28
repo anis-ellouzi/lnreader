@@ -2,6 +2,7 @@ import { reverse, uniqBy } from 'lodash-es';
 import { newer } from '@utils/compareVersion';
 import { store } from './helpers/storage';
 
+import * as FileSystem from 'expo-file-system';
 // packages for plugins
 import { load } from 'cheerio';
 import dayjs from 'dayjs';
@@ -17,7 +18,8 @@ import { Parser } from 'htmlparser2';
 import FileManager from '@native/FileManager';
 import { getRepositoriesFromDb } from '@database/queries/RepositoryQueries';
 import { showToast } from '@utils/showToast';
-import { PLUGIN_STORAGE } from '@utils/Storages';
+import { PLUGIN_STORAGE, ROOT_STORAGE } from '@utils/constants/Storages';
+import { Alert } from 'react-native';
 
 const packages: Record<string, any> = {
   'htmlparser2': { Parser },
@@ -85,7 +87,7 @@ const installPlugin = async (
       if (_plugin.customJS) {
         await downloadFile(_plugin.customJS, customJSPath);
       } else if (await FileManager.exists(customJSPath)) {
-        FileManager.unlink(customJSPath);
+        await FileManager.unlink(customJSPath);
       }
       if (_plugin.customCSS) {
         await downloadFile(_plugin.customCSS, customCSSPath);

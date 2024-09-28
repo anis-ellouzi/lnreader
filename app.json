@@ -5,6 +5,12 @@
     "scheme": "lnreader",
     "plugins": [
       "expo-localization"
-    ]
+    ],
+    "android": {
+      "package": "com.anonymous.LNReader"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.LNReader"
+    }
   }
 }

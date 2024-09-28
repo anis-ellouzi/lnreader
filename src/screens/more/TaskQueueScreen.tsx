@@ -10,13 +10,13 @@ import {
 
 import { useTheme } from '@hooks/persisted';
 
-import { showToast } from '../../utils/showToast';
+import { showToast } from '@utils/showToast';
 import { getString } from '@strings/translations';
 import { Appbar, EmptyView } from '@components';
 import { TaskQueueScreenProps } from '@navigators/types';
 import ServiceManager, { BackgroundTask } from '@services/ServiceManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 
 const DownloadQueue = ({ navigation }: TaskQueueScreenProps) => {
   const theme = useTheme();

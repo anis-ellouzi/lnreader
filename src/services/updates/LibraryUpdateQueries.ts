@@ -3,7 +3,7 @@ import * as SQLite from 'expo-sqlite';
 import { ChapterItem, SourceNovel } from '@plugins/types';
 import { getPlugin, LOCAL_PLUGIN_ID } from '@plugins/pluginManager';
 import FileManager from '@native/FileManager';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 import { downloadFile } from '@plugins/helpers/fetch';
 import ServiceManager from '@services/ServiceManager';
 const db = SQLite.openDatabase('lnreader.db');

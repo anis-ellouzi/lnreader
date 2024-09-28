@@ -1,7 +1,7 @@
 import { AuthenticationResult, Tracker, TrackerName } from '@services/Trackers';
 import { aniListTracker } from '@services/Trackers/aniList';
 import { myAnimeListTracker } from '@services/Trackers/myAnimeList';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 
 export const TRACKER = 'TRACKER';
 export const TRACKED_NOVELS = 'TRACKED_NOVELS';

@@ -1,5 +1,5 @@
 import { SearchResult, UserListEntry } from '@services/Trackers';
-import { useMMKVNumber, useMMKVObject } from 'react-native-mmkv';
+import { useMMKVNumber, useMMKVObject } from '@utils/mmkv/mmkv';
 import { TrackerMetadata, getTracker } from './useTracker';
 import { ChapterInfo, NovelInfo } from '@database/types';
 import { MMKVStorage } from '@utils/mmkv/mmkv';
@@ -29,7 +29,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getString } from '@strings/translations';
 import dayjs from 'dayjs';
 import { parseChapterNumber } from '@utils/parseChapterNumber';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 import FileManager from '@native/FileManager';
 import { useAppSettings } from './useSettings';
 

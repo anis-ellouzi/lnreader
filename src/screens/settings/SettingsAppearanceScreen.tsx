@@ -6,11 +6,7 @@ import SettingSwitch from './components/SettingSwitch';
 import ColorPickerModal from '@components/ColorPickerModal/ColorPickerModal';
 
 import { useAppSettings, useTheme } from '@hooks/persisted';
-import {
-  useMMKVBoolean,
-  useMMKVObject,
-  useMMKVString,
-} from 'react-native-mmkv';
+import { useMMKVBoolean, useMMKVObject, useMMKVString } from '@utils/mmkv/mmkv';
 import { Appbar, List } from '@components';
 import { AppearanceSettingsScreenProps } from '@navigators/types';
 import { getString } from '@strings/translations';

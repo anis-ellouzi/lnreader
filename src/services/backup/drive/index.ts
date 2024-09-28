@@ -1,15 +1,15 @@
 import { DriveFile } from '@api/drive/types';
 import { sleep } from '@utils/sleep';
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 import { exists } from '@api/drive';
 import { getString } from '@strings/translations';
 import { CACHE_DIR_PATH, prepareBackupData, restoreData } from '../utils';
 import { download, updateMetadata, uploadMedia } from '@api/drive/request';
 import { ZipBackupName } from '../types';
-import { ROOT_STORAGE } from '@utils/Storages';
+import { ROOT_STORAGE } from '@utils/constants/Storages';
 
 export const createDriveBackup = (backupFolder: DriveFile) => {
-  return BackgroundService.updateNotification({
+  return BGService.updateNotification({
     taskDesc: getString('backupScreen.preparingData'),
     progressBar: {
       indeterminate: true,
@@ -19,7 +19,7 @@ export const createDriveBackup = (backupFolder: DriveFile) => {
   })
     .then(() => prepareBackupData(CACHE_DIR_PATH))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.uploadingData'),
         progressBar: {
           indeterminate: true,
@@ -42,7 +42,7 @@ export const createDriveBackup = (backupFolder: DriveFile) => {
       ),
     )
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.uploadingDownloadedFiles'),
         progressBar: {
           indeterminate: true,
@@ -75,7 +75,7 @@ export const driveRestore = async (backupFolder: DriveFile) => {
   if (!zipDataFile || !zipDownloadFile) {
     throw new Error(getString('backupScreen.invalidBackupFolder'));
   }
-  await BackgroundService.updateNotification({
+  await BGService.updateNotification({
     taskDesc: getString('backupScreen.downloadingData'),
     progressBar: {
       indeterminate: true,
@@ -86,7 +86,7 @@ export const driveRestore = async (backupFolder: DriveFile) => {
     .then(() => download(zipDataFile, CACHE_DIR_PATH))
     .then(() => sleep(500))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.restoringData'),
         progressBar: {
           indeterminate: true,
@@ -98,7 +98,7 @@ export const driveRestore = async (backupFolder: DriveFile) => {
     .then(() => restoreData(CACHE_DIR_PATH))
     .then(() => sleep(500))
     .then(() =>
-      BackgroundService.updateNotification({
+      BGService.updateNotification({
         taskDesc: getString('backupScreen.downloadingDownloadedFiles'),
         progressBar: {
           indeterminate: true,

@@ -1,7 +1,7 @@
 import { ChapterInfo, NovelInfo } from '@database/types';
 import ServiceManager, { BackgroundTask } from '@services/ServiceManager';
 import { useMemo } from 'react';
-import { useMMKVObject } from 'react-native-mmkv';
+import { useMMKVObject } from '@utils/mmkv/mmkv';
 
 export const DOWNLOAD_QUEUE = 'DOWNLOAD';
 export const CHAPTER_DOWNLOADING = 'CHAPTER_DOWNLOADING';

@@ -1,6 +1,6 @@
-import { MMKV } from 'react-native-mmkv';
+import { PluginStorage } from '@utils/mmkv/mmkv';
 
-const store = new MMKV({ id: 'plugin_db' });
+const store = PluginStorage;
 
 const PLUGIN_STORAGE = '_DB_';
 const WEBVIEW_LOCAL_STORAGE = '_LocalStorage';

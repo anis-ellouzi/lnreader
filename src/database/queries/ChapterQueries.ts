@@ -8,7 +8,7 @@ import { Update } from '../types';
 import { noop } from 'lodash-es';
 import { getString } from '@strings/translations';
 import FileManager from '@native/FileManager';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 
 const db = SQLite.openDatabase('lnreader.db');
 const insertChapterQuery = `

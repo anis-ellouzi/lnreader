@@ -4,9 +4,9 @@ import { enableFreeze } from 'react-native-screens';
 enableFreeze(true);
 
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, NativeModules, NativeEventEmitter } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import LottieSplashScreen from 'react-native-lottie-splash-screen';
+//import LottieSplashScreen from 'react-native-lottie-splash-screen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
 import * as Notifications from 'expo-notifications';
@@ -16,7 +16,14 @@ import AppErrorBoundary from '@components/AppErrorBoundary/AppErrorBoundary';
 
 import Main from './src/navigators/Main';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { View } from 'react-native';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([
+  'EventEmitter.removeListener',
+  '`new NativeEventEmitter()`',
+  'toggling bottomTabs visibility is deprecated on iOS.',
+]);
 Notifications.setNotificationHandler({
   handleNotification: async () => {
     return {
@@ -27,8 +34,8 @@ Notifications.setNotificationHandler({
   },
 });
 
-createTables();
-LottieSplashScreen.hide();
+//createTables();
+//LottieSplashScreen.hide();
 
 const App = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
-import { DrawerLayoutAndroid } from 'react-native';
-
+import { DrawerLayout } from 'react-native-gesture-handler';
+import { Drawer } from 'react-native-drawer-layout';
 import { useChapterGeneralSettings, useTheme } from '@hooks/persisted';
 
 import ReaderAppbar from './components/ReaderAppbar';
@@ -19,13 +19,13 @@ import useChapter from './hooks/useChapter';
 import { ChapterContextProvider, useChapterContext } from './ChapterContext';
 
 const Chapter = ({ route, navigation }: ChapterScreenProps) => {
-  const drawerRef = useRef<DrawerLayoutAndroid>(null);
+  const drawerRef = useRef<DrawerLayout>(null);
   return (
     <ChapterContextProvider
       novel={route.params.novel}
       initialChapter={route.params.chapter}
     >
-      <DrawerLayoutAndroid
+      <DrawerLayout
         ref={drawerRef}
         drawerWidth={300}
         drawerPosition="left"
@@ -36,13 +36,13 @@ const Chapter = ({ route, navigation }: ChapterScreenProps) => {
           navigation={navigation}
           drawerRef={drawerRef}
         />
-      </DrawerLayoutAndroid>
+      </DrawerLayout>
     </ChapterContextProvider>
   );
 };
 
 type ChapterContentProps = ChapterScreenProps & {
-  drawerRef: React.RefObject<DrawerLayoutAndroid>;
+  drawerRef: React.RefObject<DrawerLayout>;
 };
 
 export const ChapterContent = ({

@@ -15,7 +15,7 @@ import {
 } from '@hooks/persisted';
 import FileManager from '@native/FileManager';
 import { fetchChapter } from '@services/plugin/fetch';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 import { RefObject, useCallback, useEffect, useState } from 'react';
 import { sanitizeChapterText } from '../utils/sanitizeChapterText';
 import { parseChapterNumber } from '@utils/parseChapterNumber';
@@ -29,7 +29,7 @@ import { useChapterContext } from '../ChapterContext';
 import { showToast } from '@utils/showToast';
 import { getString } from '@strings/translations';
 
-const emmiter = new NativeEventEmitter(VolumeButtonListener);
+//const emmiter = new NativeEventEmitter(VolumeButtonListener);
 
 export default function useChapter(webViewRef: RefObject<WebView>) {
   const { novel, chapter, setChapter, loading, setLoading } =
@@ -49,8 +49,10 @@ export default function useChapter(webViewRef: RefObject<WebView>) {
   const { setImmersiveMode, showStatusAndNavBar } = useFullscreenMode();
 
   const connectVolumeButton = () => {
+    /*
     VolumeButtonListener.connect();
     VolumeButtonListener.preventDefault();
+
     emmiter.addListener('VolumeUp', () => {
       webViewRef.current?.injectJavaScript(`(()=>{
           window.scrollBy({top: -${
@@ -64,22 +66,22 @@ export default function useChapter(webViewRef: RefObject<WebView>) {
             Dimensions.get('window').height * 0.75
           }, behavior: 'smooth'})
         })()`);
-    });
+    });*/
   };
 
   useEffect(() => {
     if (useVolumeButtons) {
       connectVolumeButton();
     } else {
-      VolumeButtonListener.disconnect();
-      emmiter.removeAllListeners('VolumeUp');
-      emmiter.removeAllListeners('VolumeDown');
+      //VolumeButtonListener.disconnect();
+      //emmiter.removeAllListeners('VolumeUp');
+      //emmiter.removeAllListeners('VolumeDown');
       // this is just for sure, without it app still works properly
     }
     return () => {
-      VolumeButtonListener.disconnect();
-      emmiter.removeAllListeners('VolumeUp');
-      emmiter.removeAllListeners('VolumeDown');
+      //VolumeButtonListener.disconnect();
+      //emmiter.removeAllListeners('VolumeUp');
+      //emmiter.removeAllListeners('VolumeDown');
       Speech.stop();
     };
   }, [useVolumeButtons, chapter]);

@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { getUpdatesFromDb } from '@database/queries/ChapterQueries';
 
 import { Update } from '@database/types';
-import { useMMKVBoolean, useMMKVString } from 'react-native-mmkv';
+import { useMMKVBoolean, useMMKVString } from '@utils/mmkv/mmkv';
 import dayjs from 'dayjs';
 import { parseChapterNumber } from '@utils/parseChapterNumber';
 

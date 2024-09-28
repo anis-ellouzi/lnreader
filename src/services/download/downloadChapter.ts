@@ -1,8 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 import * as cheerio from 'cheerio';
-import BackgroundService from 'react-native-background-actions';
+import BGService from '@utils/backgroundActions';
 import FileManager from '@native/FileManager';
-import { NOVEL_STORAGE } from '@utils/Storages';
+import { NOVEL_STORAGE } from '@utils/constants/Storages';
 import { Plugin } from '@plugins/types';
 import { downloadFile } from '@plugins/helpers/fetch';
 import { getPlugin } from '@plugins/pluginManager';
@@ -75,7 +75,7 @@ export const downloadChapter = async ({ chapterId }: { chapterId: number }) => {
   if (!plugin) {
     throw new Error(getString('downloadScreen.pluginNotFound'));
   }
-  await BackgroundService.updateNotification({
+  await BGService.updateNotification({
     taskTitle: getString('downloadScreen.downloadingNovel', {
       name: novel.name,
     }),

@@ -1,6 +1,7 @@
 import { getUserAgent } from '@hooks/persisted/useUserAgent';
 import FileManager from '@native/FileManager';
 import { parse as parseProto } from 'protobufjs';
+import { Alert } from 'react-native';
 
 type FetchInit = {
   headers?: Record<string, string> | Headers;

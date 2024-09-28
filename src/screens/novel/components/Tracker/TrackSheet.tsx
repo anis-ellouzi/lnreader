@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ToastAndroid } from 'react-native';
+import Toast from 'react-native-root-toast';
+import { StyleSheet, View } from 'react-native';
 import { overlay, Portal } from 'react-native-paper';
 import BottomSheet from '@components/BottomSheet/BottomSheet';
 
@@ -73,7 +74,7 @@ const TrackSheet = ({ bottomSheetRef, novel, theme }: Props) => {
 
       setTrackChaptersDialog(false);
     } else {
-      ToastAndroid.show('Enter a valid number', ToastAndroid.SHORT);
+      Toast.show('Enter a valid number');
     }
   };
 
