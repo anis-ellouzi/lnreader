@@ -34,7 +34,7 @@ Notifications.setNotificationHandler({
   },
 });
 
-//createTables();
+createTables();
 //LottieSplashScreen.hide();
 
 const App = () => {

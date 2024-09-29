@@ -1,4 +1,4 @@
-import * as SQLite from 'expo-sqlite';
+import db from '@database/dbConnection';
 import BGService from '@utils/backgroundActions';
 
 import { NovelInfo, ChapterInfo } from '@database/types';
@@ -26,8 +26,6 @@ export interface MigrateNovelData {
   fromNovel: NovelInfo;
   toNovelPath: string;
 }
-
-const db = SQLite.openDatabase('lnreader.db');
 
 const migrateNovelMetaDataQuery =
   'UPDATE Novel SET cover = ?, summary = ?, author = ?, artist = ?, status = ?, genres = ?, inLibrary = 1  WHERE id = ?';

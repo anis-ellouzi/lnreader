@@ -1,8 +1,6 @@
 import { reverse, uniqBy } from 'lodash-es';
 import { newer } from '@utils/compareVersion';
 import { store } from './helpers/storage';
-
-import * as FileSystem from 'expo-file-system';
 // packages for plugins
 import { load } from 'cheerio';
 import dayjs from 'dayjs';

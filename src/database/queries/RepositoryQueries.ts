@@ -1,11 +1,9 @@
-import * as SQLite from 'expo-sqlite';
+import db from '../dbConnection';
 
 import { Repository } from '@database/types';
 
 import { txnErrorCallback } from '../utils/helpers';
 import { noop } from 'lodash-es';
-
-const db = SQLite.openDatabase('lnreader.db');
 
 const getRepositoriesQuery = 'SELECT * FROM Repository';
 

@@ -1,9 +1,7 @@
-import * as SQLite from 'expo-sqlite';
+import db from '../dbConnection';
 import { countBy } from 'lodash-es';
 import { LibraryStats } from '../types';
 import { txnErrorCallback } from '../utils/helpers';
-
-const db = SQLite.openDatabase('lnreader.db');
 
 const getLibraryStatsQuery = `
   SELECT COUNT(*) as novelsCount, COUNT(DISTINCT pluginId) as sourcesCount

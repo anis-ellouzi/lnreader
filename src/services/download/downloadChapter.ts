@@ -1,4 +1,4 @@
-import * as SQLite from 'expo-sqlite';
+import db from '@database/dbConnection';
 import * as cheerio from 'cheerio';
 import BGService from '@utils/backgroundActions';
 import FileManager from '@native/FileManager';
@@ -10,8 +10,6 @@ import { getString } from '@strings/translations';
 import { getChapter } from '@database/queries/ChapterQueries';
 import { sleep } from '@utils/sleep';
 import { getNovelById } from '@database/queries/NovelQueries';
-
-const db = SQLite.openDatabase('lnreader.db');
 
 const createChapterFolder = async (
   path: string,

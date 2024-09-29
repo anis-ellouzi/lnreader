@@ -10,7 +10,6 @@ import dayjs from 'dayjs';
 import { NovelInfo } from '@database/types';
 import { sleep } from '@utils/sleep';
 import { getString } from '@strings/translations';
-import * as FileSystem from 'expo-file-system';
 import FileManager from '@native/FileManager';
 
 export const createBackup = async () => {
@@ -47,9 +46,7 @@ export const restoreBackup = async () => {
     let novelsString = '';
 
     if (backup.assets && backup.assets[0]) {
-      novelsString = await FileSystem.StorageAccessFramework.readAsStringAsync(
-        backup.assets[0].uri,
-      );
+      novelsString = await FileManager.readAsStringAsync(backup.assets[0].uri);
     }
     const novels: NovelInfo[] = await JSON.parse(novelsString);
     if (novels.length === 0) {

@@ -1,8 +1,7 @@
 import { History } from '@database/types';
 import { txnErrorCallback } from '@database/utils/helpers';
-import * as SQLite from 'expo-sqlite';
+import db from '../dbConnection';
 import { noop } from 'lodash-es';
-const db = SQLite.openDatabase('lnreader.db');
 
 import { showToast } from '@utils/showToast';
 import { getString } from '@strings/translations';
@@ -20,7 +19,8 @@ const getHistoryQuery = `
 
 export const getHistoryFromDb = async (): Promise<History[]> => {
   return new Promise(resolve => {
-    db.transaction(tx => {
+    /*
+     db.transaction(tx =>  {
       tx.executeSql(
         getHistoryQuery,
         [],
@@ -28,6 +28,17 @@ export const getHistoryFromDb = async (): Promise<History[]> => {
           resolve((rows as any)._array);
         },
         txnErrorCallback,
+      );
+    });*/
+
+    db.transaction(function (txn) {
+      txn.executeSql(
+        getHistoryQuery, // Query to execute as prepared statement
+        [], // Argument to pass for the prepared statement
+        function (tx, res) {
+          resolve((res.rows as any)._array); // Handle the result
+        },
+        txnErrorCallback, // Error callback
       );
     });
   });

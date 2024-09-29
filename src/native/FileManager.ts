@@ -134,6 +134,10 @@ export default class FileManager {
     return result;
   }
 
+  static async readAsStringAsync(path: string): Promise<string> {
+    return await FileSystem.readAsStringAsync(path);
+  }
+
   static async resolveExternalContentUri(
     uriString: string,
   ): Promise<string | null> {

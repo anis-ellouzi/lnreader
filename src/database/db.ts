@@ -1,4 +1,3 @@
-import * as SQLite from 'expo-sqlite';
 import {
   createCategoriesTableQuery,
   createCategoryDefaultQuery,
@@ -13,10 +12,7 @@ import {
 import { dbTxnErrorCallback } from './utils/helpers';
 import { noop } from 'lodash-es';
 import { createRepositoryTableQuery } from './tables/RepositoryTable';
-
-const dbName = 'lnreader.db';
-
-const db = SQLite.openDatabase(dbName);
+import db from './dbConnection';
 
 export const createTables = () => {
   db.exec([{ sql: 'PRAGMA foreign_keys = ON', args: [] }], false, () => {});

@@ -402,6 +402,8 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-slider (4.4.2):
     - React-Core
+  - react-native-sqlite-storage (6.0.1):
+    - React-Core
   - react-native-webview (13.2.2):
     - React-Core
   - React-NativeModulesApple (0.72.10):
@@ -627,6 +629,7 @@ DEPENDENCIES:
   - react-native-saf-x (from `../node_modules/react-native-saf-x`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
+  - react-native-sqlite-storage (from `../node_modules/react-native-sqlite-storage`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -771,6 +774,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
     :path: "../node_modules/@react-native-community/slider"
+  react-native-sqlite-storage:
+    :path: "../node_modules/react-native-sqlite-storage"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-NativeModulesApple:
@@ -892,6 +897,7 @@ SPEC CHECKSUMS:
   react-native-saf-x: 0674418b3dc3279fadfbf346880702d01c1f9035
   react-native-safe-area-context: 36cc67648134e89465663b8172336a19eeda493d
   react-native-slider: 33b8d190b59d4f67a541061bb91775d53d617d9d
+  react-native-sqlite-storage: f6d515e1c446d1e6d026aa5352908a25d4de3261
   react-native-webview: b8ec89966713985111a14d6e4bf98d8b54bced0d
   React-NativeModulesApple: c3e696ff867e4bc212266cbdf7e862e48a0166fd
   React-perflogger: 43287389ea08993c300897a46f95cfac04bb6c1a

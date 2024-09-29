@@ -1,9 +1,7 @@
 import { LibraryFilter } from '@screens/library/constants/constants';
-import * as SQLite from 'expo-sqlite';
+import db from '../dbConnection';
 import { LibraryNovelInfo, NovelInfo } from '../types';
 import { txnErrorCallback } from '../utils/helpers';
-
-const db = SQLite.openDatabase('lnreader.db');
 
 export const getNovelsWithCategory = (
   categoryId: number,

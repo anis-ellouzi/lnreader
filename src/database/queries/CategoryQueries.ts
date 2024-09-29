@@ -1,10 +1,9 @@
-import * as SQLite from 'expo-sqlite';
+import db from '../dbConnection';
 import { noop } from 'lodash-es';
 import { BackupCategory, Category, NovelCategory, CCategory } from '../types';
 import { showToast } from '@utils/showToast';
 import { txnErrorCallback } from '../utils/helpers';
 import { getString } from '@strings/translations';
-const db = SQLite.openDatabase('lnreader.db');
 
 const getCategoriesQuery = `
   SELECT * FROM Category ORDER BY sort

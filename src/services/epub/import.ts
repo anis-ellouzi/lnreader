@@ -1,5 +1,4 @@
-import * as SQLite from 'expo-sqlite';
-const db = SQLite.openDatabase('lnreader.db');
+import db from '@database/dbConnection';
 import BGService from '@utils/backgroundActions';
 import ZipArchive from '@native/ZipArchive';
 import dayjs from 'dayjs';
